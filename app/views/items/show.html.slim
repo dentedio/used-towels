@@ -1,0 +1,27 @@
+- model_class = Item
+.page-header
+  h1=t '.title', :default => model_class.model_name.human.titleize
+
+p
+  strong= model_class.human_attribute_name(:site_id) + ':'
+  br
+  = @item.site_id
+p
+  strong= model_class.human_attribute_name(:category) + ':'
+  br
+  = @item.category
+p
+  strong= model_class.human_attribute_name(:description) + ':'
+  br
+  = @item.description
+p
+  strong= model_class.human_attribute_name(:link) + ':'
+  br
+  = @item.link
+p
+  strong= model_class.human_attribute_name(:price) + ':'
+  br
+  = @item.price
+
+= link_to t('.back', :default => t("helpers.links.back")), items_path, :class => 'btn btn-default'
+'

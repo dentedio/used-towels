@@ -1,0 +1,12 @@
+- model_class = Item
+.col-lg-2.col-sm-6
+  a(href=item_path(item) class="thumbnail text-decoration-none")
+    .cart-title
+      = truncate(item.description, length: 50)
+    .card-content
+      / img
+    .card-footer
+      .label.label-success
+        = item.category
+      .label.label-info
+        = item.price

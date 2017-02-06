@@ -1,0 +1,67 @@
+.page-header
+  input(type="text" class="" id="search-input")
+hr
+#search-results
+
+#search-pagingation
+
+- content_for :scripts do
+  = javascript_include_tag "//cdn.jsdelivr.net/instantsearch.js/1.9.0/instantsearch.min.js"
+  script(id="hit-template" type="text/html")
+    <div class="col-lg-2 col-sm-6">
+      <a class="thumbnail text-decoration-none" href="{{item_url}}">
+        <div class="cart-title">{{title}}</div>
+        <div class="card-content">{{description}}</div>
+        <div class="card-footer">
+          <span class="label label-success">{{category}}</span>
+          <span class="label label-info">{{price}}</span>
+          <span class="">{{#helpers.dateInWords}}{{created_at_i}}{{/helpers.dateInWords}}</span>
+        </div>
+      </a>
+    </div>
+  script(type="text/javascript")
+    var search = instantsearch({
+      appId: "#{Rails.application.secret.algolia_app_id}",
+      apiKey: "#{Rails.application.secret.algolia_search_api_key}",
+      indexName: 'Item',
+      urlSync: {
+        trackedParameters: ['query']
+      }
+    });
+
+    // search.templatesConfig.helpers.isNew = function() {
+    //   var ribbon = '';
+    //   if (fuzzyTime.isWithinAWeek(this.created_at_i)) {
+    //     ribbon = '<div class="corner-label new left"><div class="text">NEW</div></div>';
+    //   }
+    //   return ribbon;
+    // };
+
+    search.templatesConfig.helpers.dateInWords = function() {
+      return fuzzyTime.inWords(this.updated_at_i);
+    };
+
+    search.addWidget(
+      instantsearch.widgets.searchBox({
+        container: '#search-input',
+        placeholder: 'Search Items...'
+      })
+    );
+
+    search.addWidget(
+      instantsearch.widgets.hits({
+        container: '#search-results',
+        templates: {
+          item: document.querySelector('#hit-template').innerHTML
+        }
+      })
+    );
+
+    search.addWidget(
+      instantsearch.widgets.pagination({
+        container: '#search-pagination'
+      })
+    );
+
+    search.start();
+  </script>

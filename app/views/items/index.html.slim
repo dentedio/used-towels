@@ -1,5 +1,11 @@
 .page-header
-  input(type="text" class="" id="search-input")
+  .form-group.has-feedback
+    .input-group
+      .input-group-addon
+        i.fa.fa-search
+      input#search-input.form-control.large(type="text")
+    a#search-clear.form-control-feedback.hide(href="#")
+      i.fa.fa-times-circle
 hr
 #search-results
 
@@ -19,10 +25,10 @@ hr
         </div>
       </a>
     </div>
-  script(type="text/javascript")
+  javascript:
     var search = instantsearch({
-      appId: "#{Rails.application.secret.algolia_app_id}",
-      apiKey: "#{Rails.application.secret.algolia_search_api_key}",
+      appId: "#{Rails.application.secrets.algolia_app_id}",
+      apiKey: "#{Rails.application.secrets.algolia_search_api_key}",
       indexName: 'Item',
       urlSync: {
         trackedParameters: ['query']

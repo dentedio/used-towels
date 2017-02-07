@@ -1,9 +1,10 @@
 class Item < ApplicationRecord
+  include AlgoliaSearch
 
   validates_presence_of :title, :price, :category, :description
   validates_uniqueness_of :site_id, :link
 
-  algoliasearch enqueue: :update_algolia,  if: :published?  do
+  algoliasearch enqueue: :update_algolia do
 
     attributes  :title, :description, :price, :category, :resource_url
 

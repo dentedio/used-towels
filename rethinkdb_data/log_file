@@ -14,3 +14,8 @@
 2017-02-06T13:52:43.728351000 40.158914s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
 2017-02-06T13:52:43.728355000 40.158917s notice: Server ready, "momo_local_ocn" dfe1ee52-9383-405a-914e-2eafea44bcd3
 2017-02-06T13:52:43.739869000 40.170433s warn: Problem when checking for new versions of RethinkDB: HTTP request to update.rethinkdb.com failed.
+2017-02-06T20:18:40.002896000 4944.192365s notice: Server got SIGINT from pid 67464, uid 501; shutting down...
+2017-02-06T20:18:40.003035000 4944.192503s notice: Shutting down client connections...
+2017-02-06T20:18:40.003147000 4944.192616s notice: All client connections closed.
+2017-02-06T20:18:40.003153000 4944.192621s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2017-02-06T20:18:40.005877000 4944.195346s notice: Storage engine shut down.

@@ -1,12 +1,18 @@
-- model_class = Item
-.col-lg-2.col-sm-6
-  a(href=item_path(item) class="thumbnail text-decoration-none")
-    .cart-title
+.col-sm-6.col-md-3.col-lg-2
+  .thumbnail.product-thumbnail
+    img(src="item.image_url" alt=item.title)
+    .product-title
+      = item.title
+    .product-source
+      = item.source
+    .product-description
       = truncate(item.description, length: 50)
-    .card-content
-      / img
-    .card-footer
-      .label.label-success
-        = item.category
-      .label.label-info
-        = item.price
+    hr.line
+    .row
+      .col-sm-8
+        .product-price
+          = number_to_currency(item.price)
+      .col-sm-4
+        a.btn.btn-info.pull-right(href=item.link target="_blank")
+          = I18n.t('views.items.view')
+          i.fa.fa-external-link.fa-fw

@@ -1,10 +1,18 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-column-fix";
+@import "items";
 
 .text-decoration-none {
   text-decoration: none;
   &:hover {
     text-decoration: none;
   }
+}
+
+.footer {
+  padding: 50px 0;
+  background-color: #444;
+  color: #fff;
 }

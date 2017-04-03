@@ -17,7 +17,8 @@ p
 p
   strong= model_class.human_attribute_name(:link) + ':'
   br
-  = @item.link
+  a(href=@item.link target="_blank")
+    = @item.link
 p
   strong= model_class.human_attribute_name(:price) + ':'
   br

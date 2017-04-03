@@ -4,14 +4,10 @@ require 'open-uri'
 class AsiaxpatJob < ApplicationJob
   queue_as :daily
 
-  # rescue_from(ErrorLoadingSite) do
-  #   retry_job wait: 5.minutes, queue: :low_priority
-  # end
-
   def perform
     @css_query = '.soltop .listitem'
     @previous_first_page_link = ''
-    site = 'http://hongkong.asiaxpat.com'
+    site = 'https://hongkong.asiaxpat.com'
     links = []
     url = "#{site}/classifieds/"
 
@@ -65,6 +61,11 @@ class AsiaxpatJob < ApplicationJob
       atag = page.css("#{item.css_path} h4.R a").first
       link = atag['href']
       title = atag.inner_text.strip
+      first_image = page.css("#{item.css_path} .fancybox img").first
+      image_url = ''
+      if first_image
+        image_url = first_image['src']
+      end
 
       price_details = page.css("#{item.css_path} .borderright").last
       price = price_details.children.last.inner_text.gsub("HKD", "").strip if !price_details.nil? && !price_details.children.nil?
@@ -72,12 +73,14 @@ class AsiaxpatJob < ApplicationJob
       description = page.css("#{item.css_path} .leftlistitem").first.inner_text.strip
 
       Item.create({
+        source: "AsiaXpat",
         site_id: "",
         title: title.strip,
         price: price.strip,
         category: category,
         description: description.strip,
-        link: link
+        link: link,
+        image_url: image_url
       })
     end
   end

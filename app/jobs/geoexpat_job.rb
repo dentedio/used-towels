@@ -6,9 +6,9 @@ class GeoexpatJob < ApplicationJob
 
   def perform
     @css_query = '#dj-classifieds .items .gxclsf-cat-desc'
-    site = 'https://geoexpat.com'
+    @site = 'https://geoexpat.com'
     links = []
-    url = "#{site}/classifieds/"
+    url = "#{@site}/classifieds/"
 
     puts "Starting GeoExpat"
     page = Nokogiri::HTML(open(url))
@@ -23,7 +23,7 @@ class GeoexpatJob < ApplicationJob
 
     links.each do |relative_url|
       category = relative_url.gsub('/classifieds/','')[0..-2]
-      base_url = "#{site}#{relative_url}"
+      base_url = "#{@site}#{relative_url}"
       fetch(base_url, category)
     end
   end
@@ -60,6 +60,11 @@ class GeoexpatJob < ApplicationJob
     if !page.nil?
       site_id = page.css('#item_id').first['value']
       title = page.css('.dj-item .title_top h2').first.inner_text.strip
+      first_image = page.css('.dj-item .djc_thumbnail a').first
+      image_url = ''
+      if first_image
+        image_url = "#{@site}#{first_image['href']}"
+      end
 
       price_details = page.css('.dj-item .general_det span[itemprop="price"]').first
       price = ''
@@ -74,12 +79,14 @@ class GeoexpatJob < ApplicationJob
       end
 
       Item.create({
+        source: "GeoExpat",
         site_id: site_id,
         title: title.strip,
         price: price.strip,
         category: category,
         description: description.strip,
-        link: url
+        link: url,
+        image_url: image_url
       })
     end
   end

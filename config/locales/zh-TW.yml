@@ -1,13 +1,13 @@
-en:
+zh-TW:
   helpers:
     page_entries_info:
+      more_pages:
+        display_entries: "顯示 <b>%{first}&nbsp;-&nbsp;%{last}</b> 筆 %{entry_name}，共 <b>%{total}</b> 筆"
       one_page:
         display_entries:
-          zero: "No %{entry_name} found"
-          one: "Displaying <b>1</b> %{entry_name}"
-          other: "Displaying <b>all %{count}</b> %{entry_name}"
-      more_pages:
-        display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
+          one: "只有 <b>1</b> 筆 %{entry_name}"
+          other: "顯示 <b>所有 %{count}</b> 筆 %{entry_name}"
+          zero: "找不到 %{entry_name}"
 
     search: "Search Items..."
     select:
@@ -66,16 +66,16 @@ en:
 
   views:
     pagination:
-      first: "&laquo; First"
-      last: "Last &raquo;"
-      previous: "&lsaquo; Prev"
-      next: "Next &rsaquo;"
+      first: "&laquo; 首頁"
+      last: "末頁 &raquo;"
+      next: "下一頁 &rsaquo;"
+      previous: "&lsaquo; 上一頁"
       truncate: "&hellip;"
     items:
       empty: There are no posts containing the term(s) <strong>%{search}</strong>.
       view: Details
 
   site:
-    copyright: "&copy; Used Towels %{year}"
-    brand: Used Towels
+    copyright: "&copy; 二手易搜 %{year}"
+    brand: 二手易搜
     title: Used Towels Search

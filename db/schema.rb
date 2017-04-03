@@ -13,12 +13,14 @@
 ActiveRecord::Schema.define(version: 20160913065425) do
 
   create_table "items", force: :cascade do |t|
+    t.string   "source"
     t.string   "site_id"
     t.string   "title"
     t.string   "category"
     t.text     "description"
     t.string   "link"
     t.string   "price"
+    t.string   "image_url"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

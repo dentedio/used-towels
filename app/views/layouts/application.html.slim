@@ -4,7 +4,7 @@ html lang="en"
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title= content_for?(:title) ? yield(:title) : "UsedTowelsWeb"
+    title= content_for?(:title) ? yield(:title) : I18n.t('.site.title')
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
     = favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
@@ -13,29 +13,42 @@ html lang="en"
     = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
     = stylesheet_link_tag "https://cdn.jsdelivr.net/fontawesome/4.7.0/css/font-awesome.min.css", media: "all"
-    /! Le HTML5 shim, for IE6-8 support of HTML elements
-    /[if lt IE 9]
-      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"
 
   body
-    .navbar.navbar-default.navbar-static-top
-        .container
-          button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand href="/"Used Towels
-          .navbar-collapse.collapse.navbar-responsive-collapse
-            ul.nav.navbar-nav
-              li= link_to "Items", "/items"
-
+    .navbar.navbar-default
+      .container
+        .navbar-header
+          button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-collapse"
+            i.fa.fa-bars
+          a.navbar-brand href=root_url
+            = I18n.t '.site.brand'
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href=url_for(locale: :"zh-TW"))
+                | 中文 (繁體)
+            li
+              a(href=url_for(locale: :en))
+                | EN
+            li
+              a(href="#search")
+                i.fa.fa-search
     .container-fluid
       .row
-        .col-lg-12
-          = bootstrap_flash
+        .col-sm-12
           = yield
 
-      footer
-        p= t '.site.copyright'
+    footer.footer
+      .container
+        p= I18n.t('.site.copyright', year: Time.now.year).html_safe
+
+    #search-modal
+      button.close(type="button")
+        i.fa.fa-times
+      form#items_search.navbar-form(action=items_url method="GET")
+        input(type="search" name="q" placeholder=I18n.t('helpers.search'))
+        button.btn.btn-primary.btn-lg(type="submit")
+          i.fa.fa-search
 
     = javascript_include_tag "application"
+    = yield(:scripts)

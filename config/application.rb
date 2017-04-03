@@ -14,6 +14,8 @@ module UsedTowelsWeb
 
     config.active_job.queue_adapter = :sidekiq
 
+    config.i18n.default_locale = :en
+
     # Rails 5
 
     # config.middleware.insert_before 0, Rack::Cors do

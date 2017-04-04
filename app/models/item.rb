@@ -35,11 +35,15 @@ class Item < ApplicationRecord
   end
 
   scope :search, -> (search_text) do
-    where("title LIKE :text OR description LIKE :text", text: search_text)
+    where("title LIKE :text OR description LIKE :text", text: "%#{search_text}%")
   end
 
   def resource_url
    Rails.application.routes.url_helpers.item_path(id)
+  end
+
+  def image
+    image_url.present? ? image_url : 'http://placehold.it/240x180'
   end
 
   # def self.update_algolia record, remove

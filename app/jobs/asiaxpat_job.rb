@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 
 class AsiaxpatJob < ApplicationJob
-  queue_as :daily
+  queue_as :default
 
   def perform
     @css_query = '.soltop .listitem'

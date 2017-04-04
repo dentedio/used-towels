@@ -17,8 +17,8 @@ class ItemsController < ApplicationController
     # AsiaxpatJob.perform_later
     # GeoexpatJob.perform_later
 
-    AsiaxpatJob.perform_now
-    # GeoexpatJob.perform_later
+    # AsiaxpatJob.perform_now
+    GeoexpatJob.perform_now
     render :index
   end
 

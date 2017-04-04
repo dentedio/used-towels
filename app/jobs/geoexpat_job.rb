@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 
 class GeoexpatJob < ApplicationJob
-  queue_as :daily
+  queue_as :default
 
   def perform
     @css_query = '#dj-classifieds .items .gxclsf-cat-desc'

@@ -19,13 +19,13 @@ class ItemsController < ApplicationController
 
     # AsiaxpatJob.perform_now
     GeoexpatJob.perform_now
-    render :index
+    redirect_to :index
   end
 
   private
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find_by(id: params[:id])
   end
 
   def search_params

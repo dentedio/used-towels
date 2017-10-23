@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
 
     # AsiaxpatJob.perform_now
     GeoexpatJob.perform_now
-    redirect_to :index
+    redirect_to action: :index
   end
 
   private

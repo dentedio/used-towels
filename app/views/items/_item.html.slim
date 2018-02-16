@@ -4,7 +4,7 @@
     .product-title
       = item.title
     .product-source
-      = item.source
+      = "#{item.source} | #{item.created_at.to_s(:url_friendly)}"
     .product-description
       = truncate(item.description, length: 50)
     hr.line

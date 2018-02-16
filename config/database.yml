@@ -4,11 +4,10 @@ postgres: &postgres
   pool: 5
 
 development:
+  <<: *postgres
   url: <%= Rails.application.secrets.database_uri %>
 
 test:
   <<: *postgres
-  database: scarif_test
-  username:
-  password:
+  url: <%= Rails.application.secrets.database_uri %>
 

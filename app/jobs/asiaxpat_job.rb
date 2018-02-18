@@ -5,6 +5,10 @@ class AsiaxpatJob < ApplicationJob
   queue_as :default
 
   def perform
+    execute_job
+  end
+
+  def execute_job
     @css_query = '.soltop .listitem'
     @previous_first_page_link = ''
     site = 'https://hongkong.asiaxpat.com'

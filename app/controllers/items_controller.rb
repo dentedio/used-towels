@@ -13,10 +13,6 @@ class ItemsController < ApplicationController
   end
 
   def fetch
-    # After Adding Sidekiq
-    # AsiaxpatJob.perform_later
-    # GeoexpatJob.perform_later
-
     # AsiaxpatJob.perform_now
     GeoexpatJob.perform_now
     redirect_to action: :index

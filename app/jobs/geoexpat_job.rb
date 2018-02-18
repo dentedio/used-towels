@@ -5,6 +5,10 @@ class GeoexpatJob < ApplicationJob
   queue_as :default
 
   def perform
+    execute_job
+  end
+
+  def execute_job
     @css_query = '#dj-classifieds .items .gxclsf-cat-desc'
     @site = 'https://geoexpat.com'
     links = []
@@ -78,14 +82,12 @@ class GeoexpatJob < ApplicationJob
         description = description_details.inner_text.strip
       end
 
-      Item.create({
-        source: "GeoExpat",
-        site_id: site_id,
+      i = Item.find_or_initialize_by({source: "GeoExpat", link: url, site_id: site_id})
+      i.update_attributes({
         title: title.strip,
         price: price.strip,
         category: category,
         description: description.strip,
-        link: url,
         image_url: image_url
       })
     end
